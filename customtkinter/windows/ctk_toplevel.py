@@ -42,6 +42,8 @@ class CTkToplevel(tkinter.Toplevel, CTkAppearanceModeBaseClass, CTkScalingBaseCl
             # Set Windows titlebar icon
             if sys.platform.startswith("win"):
                 customtkinter_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                if hasattr(sys, '_MEIPASS'):
+                    customtkinter_directory = sys._MEIPASS
                 self.after(200, lambda: self.iconbitmap(os.path.join(customtkinter_directory, "assets", "icons", "CustomTkinter_icon_Windows.ico")))
         except Exception:
             pass
@@ -208,6 +210,8 @@ class CTkToplevel(tkinter.Toplevel, CTkAppearanceModeBaseClass, CTkScalingBaseCl
             # if not the user already called iconbitmap method, set icon
             if not self._iconbitmap_method_called:
                 customtkinter_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                if hasattr(sys, '_MEIPASS'):
+                    customtkinter_directory = sys._MEIPASS
                 self.iconbitmap(os.path.join(customtkinter_directory, "assets", "icons", "CustomTkinter_icon_Windows.ico"))
         except Exception:
             pass

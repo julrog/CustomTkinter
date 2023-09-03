@@ -16,8 +16,10 @@ class ThemeManager:
         script_directory = os.path.dirname(os.path.abspath(__file__))
 
         if theme_name_or_path in cls._built_in_themes:
-            customtkinter_path = pathlib.Path(script_directory).parent.parent.parent
-            with open(os.path.join(customtkinter_path, "assets", "themes", f"{theme_name_or_path}.json"), "r") as f:
+            customtkinter_directory = pathlib.Path(script_directory).parent.parent.parent
+            if hasattr(sys, '_MEIPASS'):
+                customtkinter_directory = sys._MEIPASS
+            with open(os.path.join(customtkinter_directory, "assets", "themes", f"{theme_name_or_path}.json"), "r") as f:
                 cls.theme = json.load(f)
         else:
             with open(theme_name_or_path, "r") as f:
